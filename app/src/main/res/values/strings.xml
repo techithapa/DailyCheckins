@@ -1,16 +1,17 @@
 <resources>
-    <string name="app_name">CriminalIntent</string>
-    <string name="crime_title_hint">Crime1</string>
+    <string name="app_name">My Checkins</string>
+    <string name="checkin_title_hint">ABC Event</string>
     <string name="crime_title_label">Title</string>
-    <string name="crime_details_label">Details</string>
+    <string name="checkin_place_label">Place</string>
+    <string name="checkin_details_label">Details</string>
     <string name="crime_solved_label">Solved</string>
     <string name="date_picker_title">Date of crime:</string>
-    <string name="new_crime">New Crime</string>
-    <string name="show_subtitle">Show Subtitle</string>
+    <string name="new_checkins">New Checkins</string>
+    <string name="show_help">Help!</string>
     <string name="hide_subtitle">Hide Subtitle</string>
     <string name="subtitle_format">%1$d crimes</string>
-    <string name="crime_suspect_text">Choose Suspect</string>
-    <string name="crime_report_text">Send Crime Report</string>
+    <string name="show_location">Show Map</string>
+    <string name="checkin_record_text">Share</string>
     <string name="crime_report">%1$s!
 The crime was discovered on %2$s. %3$s, and %4$s
 </string>

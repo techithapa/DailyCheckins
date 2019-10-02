@@ -17,14 +17,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
             <ImageView
-                android:id="@+id/crime_photo"
+                android:id="@+id/checkin_image"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:scaleType="centerInside"
                 android:cropToPadding="true"
                 android:background="@android:color/darker_gray"/>
             <ImageButton
-                android:id="@+id/crime_camera"
+                android:id="@+id/take_picture"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@android:drawable/ic_menu_camera"/>
@@ -40,21 +40,25 @@
                 android:text="@string/crime_title_label"
                 style="?android:listSeparatorTextViewStyle"/>
             <EditText
-                android:id="@+id/crime_title"
+                android:id="@+id/checkin_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/crime_title_hint"/>
+                android:hint="@string/checkin_title_hint"/>
         </LinearLayout>
     </LinearLayout>
-
 
     <TextView
         style="?android:listSeparatorTextViewStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/crime_details_label"/>
+        android:text="@string/checkin_place_label"/>
+    <TextView
+        style="?android:listSeparatorTextViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/checkin_details_label"/>
     <Button
-        android:id="@+id/crime_date"
+        android:id="@+id/checkin_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <CheckBox
@@ -63,13 +67,13 @@
         android:layout_height="wrap_content"
         android:text="@string/crime_solved_label"/>
     <Button
-        android:id="@+id/crime_suspect"
+        android:id="@+id/checkin_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/crime_suspect_text"/>
+        android:text="@string/show_location"/>
     <Button
-        android:id="@+id/crime_report"
+        android:id="@+id/checkin_record"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/crime_report_text"/>
+        android:text="@string/checkin_record_text"/>
 </LinearLayout>

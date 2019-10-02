@@ -4,14 +4,19 @@
     android:layout_height="wrap_content" android:padding="8dp">
 
     <TextView
-        android:id="@+id/crime_title"
+        android:id="@+id/checkins_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Crime Title"/>
+        android:text="Checkin Title"/>
     <TextView
-        android:id="@+id/crime_date"
+        android:id="@+id/checkins_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Crime Date"/>
+        android:text="Checkin Date"/>
+    /*<TextView
+        android:id="@+id/checkins_place"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Checkin Place"/>*/
 
 </LinearLayout>

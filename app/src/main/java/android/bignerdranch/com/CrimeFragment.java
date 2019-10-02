@@ -25,7 +25,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -78,8 +77,8 @@ public class CrimeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-        View v = inflater.inflate(R.layout.fragment_crime, container, false);
-        mTitleField = (EditText) v.findViewById(R.id.crime_title);
+        View v = inflater.inflate(R.layout.fragment_checkin, container, false);
+        mTitleField = (EditText) v.findViewById(R.id.checkin_title);
         mTitleField.setText(mCrime.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -100,7 +99,7 @@ public class CrimeFragment extends Fragment {
 
             }
         });
-        mDateButton = (Button) v.findViewById(R.id.crime_date);
+        mDateButton = (Button) v.findViewById(R.id.checkin_date);
         updateDate();
         mDateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,7 +122,7 @@ public class CrimeFragment extends Fragment {
             }
         });
 
-        mReportButton = (Button) v.findViewById(R.id.crime_report);
+        mReportButton = (Button) v.findViewById(R.id.checkin_record);
         mReportButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_SEND);
@@ -139,7 +138,7 @@ public class CrimeFragment extends Fragment {
         final Intent pickContact = new Intent(Intent.ACTION_PICK,
                 ContactsContract.Contacts.CONTENT_URI);
         //pickContact.addCategory(Intent.CATEGORY_HOME);
-        mSuspectButton = (Button) v.findViewById(R.id.crime_suspect);
+        mSuspectButton = (Button) v.findViewById(R.id.checkin_location);
         mSuspectButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivityForResult(pickContact, REQUEST_CONTACT);
@@ -155,7 +154,7 @@ public class CrimeFragment extends Fragment {
             mSuspectButton.setEnabled(false);
         }
 
-        mPhotoButton = (ImageButton) v.findViewById(R.id.crime_camera);
+        mPhotoButton = (ImageButton) v.findViewById(R.id.take_picture);
         final Intent captureImage = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         boolean canTakePhoto = mPhotoFile != null &&
                 captureImage.resolveActivity(packageManager) != null;
@@ -177,7 +176,7 @@ public class CrimeFragment extends Fragment {
                 startActivityForResult(captureImage, REQUEST_PHOTO);
             }
         });
-        mPhotoView = (ImageView) v.findViewById(R.id.crime_photo);
+        mPhotoView = (ImageView) v.findViewById(R.id.checkin_image);
         updatePhotoView();
         return v;
     }

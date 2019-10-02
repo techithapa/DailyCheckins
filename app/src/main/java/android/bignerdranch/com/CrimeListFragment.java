@@ -9,9 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,11 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import static android.bignerdranch.com.R.layout.list_item_crime;
-
 public class CrimeListFragment extends Fragment {
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
-    private RecyclerView mCrimeRecyclerView;
+    private RecyclerView mMycheckinsRecyclerView;
     private CrimeAdapter mAdapter;
     private boolean mSubtitleVisible;
 
@@ -36,10 +32,10 @@ public class CrimeListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_crime_list, container, false);
-        mCrimeRecyclerView = (RecyclerView) view
-                .findViewById(R.id.crime_recycler_view);
-        mCrimeRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        View view = inflater.inflate(R.layout.fragment_checkin_record, container, false);
+        mMycheckinsRecyclerView = (RecyclerView) view
+                .findViewById(R.id.mycheckins_recycler_view);
+        mMycheckinsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         if (savedInstanceState != null) {
             mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
@@ -63,26 +59,26 @@ public class CrimeListFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.fragment_crime_list, menu);
+        inflater.inflate(R.menu.fragment_checkin_record, menu);
 
-        MenuItem subtitleItem = menu.findItem(R.id.show_subtitle);
+        MenuItem subtitleItem = menu.findItem(R.id.show_help);
         if (mSubtitleVisible) {
             subtitleItem.setTitle(R.string.hide_subtitle);
         } else {
-            subtitleItem.setTitle(R.string.show_subtitle);
+            subtitleItem.setTitle(R.string.show_help);
         }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.new_crime:
+            case R.id.new_checkins:
                 Crime crime = new Crime();
                 CrimeLab.get(getActivity()).addCrime(crime);
                 Intent intent = CrimeActivity.newIntent(getActivity(), crime.getId());
                 startActivity(intent);
                 return true;
-            case R.id.show_subtitle:
+            case R.id.show_help:
                 mSubtitleVisible = !mSubtitleVisible;
                 getActivity().invalidateOptionsMenu();
                 updateSubtitle();
@@ -108,7 +104,7 @@ public class CrimeListFragment extends Fragment {
         List<Crime> crimes = crimeLab.getCrimes();
         if (mAdapter == null) {
             mAdapter = new CrimeAdapter(crimes);
-            mCrimeRecyclerView.setAdapter(mAdapter);
+            mMycheckinsRecyclerView.setAdapter(mAdapter);
         } else {
             mAdapter.setCrimes(crimes);
             mAdapter.notifyDataSetChanged();
@@ -126,8 +122,8 @@ public class CrimeListFragment extends Fragment {
         public CrimeHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_crime, parent, false));
             itemView.setOnClickListener(this);
-            mTitleTextView = (TextView) itemView.findViewById(R.id.crime_title);
-            mDateTextView = (TextView) itemView.findViewById(R.id.crime_date);
+            mTitleTextView = (TextView) itemView.findViewById(R.id.checkins_title);
+            mDateTextView = (TextView) itemView.findViewById(R.id.checkins_date);
 
         }
         public void bind(Crime crime) {
