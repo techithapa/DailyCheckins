@@ -34,27 +34,27 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-public class CrimeFragment extends Fragment {
-    private static final String ARG_CRIME_ID = "crime_id";
+public class CheckinFragment extends Fragment {
+    private static final String ARG_CRIME_ID = "checkin_id";
     private static final String DIALOG_DATE = "DialogDate";
 
     private static final int REQUEST_DATE = 0;
     private static final int REQUEST_CONTACT = 1;
     private static final int REQUEST_PHOTO= 2;
-    private Crime mCrime;
+    private Checkin mCheckin;
     private File mPhotoFile;
     private EditText mTitleField;
     private Button mDateButton;
-    private CheckBox mSolvedCheckBox;
-    private Button mSuspectButton;
-    private Button mReportButton;
+    //private CheckBox mSolvedCheckBox;
+    //private Button mSuspectButton;
+    //private Button mReportButton;
     private ImageButton mPhotoButton;
     private ImageView mPhotoView;
 
-    public static CrimeFragment newInstance(UUID crimeId) {
+    public static CheckinFragment newInstance(UUID checkinId) {
         Bundle args = new Bundle();
-        args.putSerializable(ARG_CRIME_ID, crimeId);
-        CrimeFragment fragment = new CrimeFragment();
+        args.putSerializable(ARG_CHECKIN_ID, checkinId);
+        CheckinFragment fragment = new CheckinFragment();
         fragment.setArguments(args);
         return fragment;
     }
@@ -62,24 +62,24 @@ public class CrimeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        UUID crimeId = (UUID) getArguments().getSerializable(ARG_CRIME_ID);
-        mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
-        mPhotoFile = CrimeLab.get(getActivity()).getPhotoFile(mCrime);
+        UUID checkinId = (UUID) getArguments().getSerializable(ARG_CHECKIN_ID);
+        mCheckin = CheckinStore.get(getActivity()).getCheckin(checkinId);
+        mPhotoFile = CheckinStore.get(getActivity()).getPhotoFile(mCheckin);
 
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        CrimeLab.get(getActivity())
-                .updateCrime(mCrime);
+        CheckinStore.get(getActivity())
+                .updateCheckin(mCheckin);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_checkin, container, false);
         mTitleField = (EditText) v.findViewById(R.id.checkin_title);
-        mTitleField.setText(mCrime.getTitle());
+        mTitleField.setText(mCheckin.getTitle());
         mTitleField.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -89,7 +89,7 @@ public class CrimeFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                mCrime.setTitle(s.toString());
+                mCheckin.setTitle(s.toString());
 
             }
 
@@ -106,13 +106,13 @@ public class CrimeFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager manager = getFragmentManager();
                 DatePickerFragment dialog = DatePickerFragment
-                        .newInstance(mCrime.getDate());
-                dialog.setTargetFragment(CrimeFragment.this, REQUEST_DATE);
+                        .newInstance(mCheckin.getDate());
+                dialog.setTargetFragment(CheckinFragment.this, REQUEST_DATE);
                 dialog.show(manager, DIALOG_DATE);
             }
         });
 
-        mSolvedCheckBox = (CheckBox) v.findViewById(R.id.crime_solved);
+       /* mSolvedCheckBox = (CheckBox) v.findViewById(R.id.crime_solved);
         mSolvedCheckBox.setChecked(mCrime.isSolved());
         mSolvedCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -120,16 +120,16 @@ public class CrimeFragment extends Fragment {
                 mCrime.setSolved(isChecked);
 
             }
-        });
+        });*/
 
         mReportButton = (Button) v.findViewById(R.id.checkin_record);
         mReportButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("text/plain");
-                i.putExtra(Intent.EXTRA_TEXT, getCrimeReport());
+                i.putExtra(Intent.EXTRA_TEXT, getCheckinReport());
                 i.putExtra(Intent.EXTRA_SUBJECT,
-                        getString(R.string.crime_report_subject));
+                        getString(R.string.checkin_report_subject));
                 i = Intent.createChooser(i, getString(R.string.send_report));
                 startActivity(i);
             }
@@ -144,8 +144,8 @@ public class CrimeFragment extends Fragment {
                 startActivityForResult(pickContact, REQUEST_CONTACT);
             }
         });
-        if (mCrime.getSuspect() != null) {
-            mSuspectButton.setText(mCrime.getSuspect());
+        if (mCheckin.getSuspect() != null) {
+            mSuspectButton.setText(mCheckin.getSuspect());
         }
 
         PackageManager packageManager = getActivity().getPackageManager();
@@ -188,7 +188,7 @@ public class CrimeFragment extends Fragment {
         if (requestCode == REQUEST_DATE) {
             Date date = (Date) data
                     .getSerializableExtra(DatePickerFragment.EXTRA_DATE);
-            mCrime.setDate(date);
+            mCheckin.setDate(date);
             updateDate();
         } else if (requestCode == REQUEST_CONTACT && data != null) {
             Uri contactUri = data.getData();
@@ -210,7 +210,7 @@ public class CrimeFragment extends Fragment {
 // that is your suspect's name
                 c.moveToFirst();
                 String suspect = c.getString(0);
-                mCrime.setSuspect(suspect);
+                mCheckin.setSuspect(suspect);
                 mSuspectButton.setText(suspect);
             } finally {
                 c.close();
@@ -227,27 +227,27 @@ public class CrimeFragment extends Fragment {
     }
 
     private void updateDate() {
-        mDateButton.setText(mCrime.getDate().toString());
+        mDateButton.setText(mCheckin.getDate().toString());
     }
 
-    private String getCrimeReport() {
+    private String getCheckinReport() {
         String solvedString = null;
-        if (mCrime.isSolved()) {
+        if (mCheckin.isSolved()) {
             solvedString = getString(R.string.crime_report_solved);
         } else {
             solvedString = getString(R.string.crime_report_unsolved);
         }
         String dateFormat = "EEE, MMM dd";
         String dateString = DateFormat.format(dateFormat,
-                mCrime.getDate()).toString();
-        String suspect = mCrime.getSuspect();
+                mCheckin.getDate()).toString();
+        String suspect = mCheckin.getSuspect();
         if (suspect == null) {
             suspect = getString(R.string.crime_report_no_suspect);
         } else {
             suspect = getString(R.string.crime_report_suspect, suspect);
         }
         String report = getString(R.string.crime_report,
-                mCrime.getTitle(), dateString, solvedString, suspect);
+                mCheckin.getTitle(), dateString, solvedString, suspect);
         return report;
     }
     private void updatePhotoView() {

@@ -3,19 +3,22 @@ package android.bignerdranch.com;
 import java.util.Date;
 import java.util.UUID;
 
-public class Crime {
+public class Checkin {
     private UUID mId;
     private String mTitle;
+    private Date mPlace;
+    private Date mDetails;
     private Date mDate;
-    private boolean mSolved;
-    private String mSuspect;
+    private Date mLocation;
+    //private boolean mSolved;
+    private String mShare;
 
-    public Crime() {
+    public Checkin() {
         this(UUID.randomUUID());
        // mId = UUID.randomUUID();
         //mDate = new Date();
     }
-    public Crime(UUID id) {
+    public Checkin(UUID id) {
         mId = id;
         mDate = new Date();
     }
@@ -32,6 +35,22 @@ public class Crime {
         this.mTitle = mTitle;
     }
 
+    public String getPlace() {
+        return mPlace;
+    }
+
+    public void setPlace(String mPlace) {
+        this.mPlace = mPlace;
+    }
+
+    public String getDetails() {
+        return mDetails;
+    }
+
+    public void setDetails(String mDetails) {
+        this.mDetails = mDetails;
+    }
+
     public Date getDate() {
         return mDate;
     }
@@ -40,19 +59,27 @@ public class Crime {
         this.mDate = mDate;
     }
 
-    public boolean isSolved() {
+    public String getLocation() {
+        return mLocation;
+    }
+
+    public void setLocation(String mLocation) {
+        this.mLocation = mLocation;
+    }
+
+    /*public boolean isSolved() {
         return mSolved;
     }
 
     public void setSolved(boolean mSolved) {
         this.mSolved = mSolved;
-    }
+    }*/
 
-    public String getSuspect() {
-        return mSuspect;
+    public String getShare() {
+        return mShare;
     }
-    public void setSuspect(String suspect) {
-        mSuspect = suspect;
+    public void setShare(String share) {
+        mShare = share;
     }
     public String getPhotoFilename() {
         return "IMG_" + getId().toString() + ".jpg";

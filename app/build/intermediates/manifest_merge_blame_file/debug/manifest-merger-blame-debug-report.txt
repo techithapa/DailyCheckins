@@ -1,0 +1,79 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="android.bignerdranch.com"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="19"
+8-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml
+10
+11    <uses-feature
+11-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:5:5-7:11
+12        android:name="android.hardware.camera"
+12-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:5:19-57
+13        android:required="false" />
+13-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:6:9-33
+14
+15    <application
+15-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:9:5-36:19
+16        android:allowBackup="true"
+16-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:10:9-35
+17        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+17-->[androidx.core:core:1.1.0] C:\Users\admin\.gradle\caches\transforms-2\files-2.1\c527b78844be871c44103f6f45a963fb\core-1.1.0\AndroidManifest.xml:24:18-86
+18        android:debuggable="true"
+19        android:icon="@mipmap/ic_launcher"
+19-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:11:9-43
+20        android:label="@string/app_name"
+20-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:12:9-41
+21        android:roundIcon="@mipmap/ic_launcher_round"
+21-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:13:9-54
+22        android:supportsRtl="true"
+22-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:14:9-35
+23        android:testOnly="true"
+24        android:theme="@style/AppTheme" >
+24-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:15:9-40
+25        <activity android:name="android.bignerdranch.com.CrimeListActivity" >
+25-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:16:9-22:20
+25-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:16:19-52
+26            <intent-filter>
+26-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:17:13-21:29
+27                <action android:name="android.intent.action.MAIN" />
+27-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:18:17-69
+27-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:18:25-66
+28
+29                <category android:name="android.intent.category.LAUNCHER" />
+29-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:20:17-77
+29-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:20:27-74
+30            </intent-filter>
+31        </activity>
+32        <activity
+32-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:23:9-26:20
+33            android:name="android.bignerdranch.com.CrimeActivity"
+33-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:24:13-42
+34            android:parentActivityName="android.bignerdranch.com.CrimeListActivity" >
+34-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:25:13-60
+35        </activity>
+36
+37        <provider
+37-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:27:9-35:20
+38            android:name="androidx.core.content.FileProvider"
+38-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:28:13-62
+39            android:authorities="android.bignerdranch.com.fileprovider"
+39-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:29:13-72
+40            android:exported="false"
+40-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:30:13-37
+41            android:grantUriPermissions="true" >
+41-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:31:13-47
+42            <meta-data
+42-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:32:13-34:48
+43                android:name="android.support.FILE_PROVIDER_PATHS"
+43-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:33:17-67
+44                android:resource="@xml/files" />
+44-->C:\Users\admin\StudioProjects\MyCheckins\app\src\main\AndroidManifest.xml:34:17-46
+45        </provider>
+46    </application>
+47
+48</manifest>

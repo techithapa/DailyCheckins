@@ -1,15 +1,15 @@
 <resources>
     <string name="app_name">My Checkins</string>
     <string name="checkin_title_hint">ABC Event</string>
-    <string name="crime_title_label">Title</string>
+    <string name="checkin_title_label">Title</string>
     <string name="checkin_place_label">Place</string>
     <string name="checkin_details_label">Details</string>
-    <string name="crime_solved_label">Solved</string>
-    <string name="date_picker_title">Date of crime:</string>
-    <string name="new_checkins">New Checkins</string>
+    <string name="saved_location_label">Saved Location</string>
+    <string name="date_picker_title">Checkin Date:</string>
+    <string name="new_checkin">New Checkin</string>
     <string name="show_help">Help!</string>
     <string name="hide_subtitle">Hide Subtitle</string>
-    <string name="subtitle_format">%1$d crimes</string>
+    <string name="subtitle_format">%1$d checkin</string>
     <string name="show_location">Show Map</string>
     <string name="checkin_record_text">Share</string>
     <string name="crime_report">%1$s!

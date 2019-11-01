@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/new_checkins"
+        android:id="@+id/new_checkin"
         android:icon="@drawable/ic_menu_new"
-        android:title="@string/new_checkins"
+        android:title="@string/new_checkin"
         app:showAsAction="ifRoom|withText"/>
 
     <item

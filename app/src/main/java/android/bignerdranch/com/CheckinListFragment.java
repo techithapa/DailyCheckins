@@ -17,10 +17,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class CrimeListFragment extends Fragment {
+public class CheckinListFragment extends Fragment {
     private static final String SAVED_SUBTITLE_VISIBLE = "subtitle";
-    private RecyclerView mMycheckinsRecyclerView;
-    private CrimeAdapter mAdapter;
+    private RecyclerView mCheckinRecyclerView;
+    private CheckinAdapter mAdapter;
     private boolean mSubtitleVisible;
 
     @Override
@@ -33,9 +33,9 @@ public class CrimeListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_checkin_record, container, false);
-        mMycheckinsRecyclerView = (RecyclerView) view
-                .findViewById(R.id.mycheckins_recycler_view);
-        mMycheckinsRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mCheckinRecyclerView = (RecyclerView) view
+                .findViewById(R.id.checkin_recycler_view);
+        mCheckinRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         if (savedInstanceState != null) {
             mSubtitleVisible = savedInstanceState.getBoolean(SAVED_SUBTITLE_VISIBLE);
@@ -72,10 +72,10 @@ public class CrimeListFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.new_checkins:
-                Crime crime = new Crime();
-                CrimeLab.get(getActivity()).addCrime(crime);
-                Intent intent = CrimeActivity.newIntent(getActivity(), crime.getId());
+            case R.id.new_checkin:
+                CheckinStore checkin = new CheckinStore();
+                CheckinStore.get(getActivity()).addCheckin(checkin);
+                Intent intent = CheckinActivity.newIntent(getActivity(), checkin.getId());
                 startActivity(intent);
                 return true;
             case R.id.show_help:
@@ -89,9 +89,9 @@ public class CrimeListFragment extends Fragment {
     }
 
     private void updateSubtitle() {
-        CrimeLab crimeLab = CrimeLab.get(getActivity());
-        int crimeCount = crimeLab.getCrimes().size();
-        String subtitle = getString(R.string.subtitle_format, crimeCount);
+        CheckinStore checkinStore = CheckinStore.get(getActivity());
+        int checkinCount = checkinStore.getCheckins().size();
+        String subtitle = getString(R.string.subtitle_format, checkinCount);
 
         if (!mSubtitleVisible) {
             subtitle = null;
@@ -100,72 +100,82 @@ public class CrimeListFragment extends Fragment {
         activity.getSupportActionBar().setSubtitle(subtitle);
     }
     private void updateUI() {
-        CrimeLab crimeLab = CrimeLab.get(getActivity());
-        List<Crime> crimes = crimeLab.getCrimes();
+        CheckinStore checkinStore = CheckinStore.get(getActivity());
+        List<CheckinStore> checkins = checkinStore.getCheckins();
         if (mAdapter == null) {
-            mAdapter = new CrimeAdapter(crimes);
-            mMycheckinsRecyclerView.setAdapter(mAdapter);
+            mAdapter = new CheckinAdapter(checkins);
+            mCheckinRecyclerView.setAdapter(mAdapter);
         } else {
-            mAdapter.setCrimes(crimes);
+            mAdapter.setCheckins(checkins);
             mAdapter.notifyDataSetChanged();
         }
         updateSubtitle();
-        //mAdapter = new CrimeAdapter(crimes);
+        //mAdapter = new CheckinAdapter(checkins);
        // mCrimeRecyclerView.setAdapter(mAdapter);
     }
 
-    private class CrimeHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    private class CheckinHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView mTitleTextView;
+        private TextView mPlaceTextView;
+        private TextView mDetailsTextView;
         private TextView mDateTextView;
-        private Crime mCrime;
+        private TextView mLocationTextView;
+        private CheckinStore mCheckin;
 
-        public CrimeHolder(LayoutInflater inflater, ViewGroup parent) {
-            super(inflater.inflate(R.layout.list_item_crime, parent, false));
+        public CheckinHolder(LayoutInflater inflater, ViewGroup parent) {
+            super(inflater.inflate(R.layout.list_item_checkin, parent, false));
             itemView.setOnClickListener(this);
-            mTitleTextView = (TextView) itemView.findViewById(R.id.checkins_title);
-            mDateTextView = (TextView) itemView.findViewById(R.id.checkins_date);
+            mTitleTextView = (TextView) itemView.findViewById(R.id.checkin_title);
+            mPlaceTextView = (TextView) itemView.findViewById(R.id.checkin_place);
+            mDetailsTextView = (TextView) itemView.findViewById(R.id.checkin_details);
+            mDateTextView = (TextView) itemView.findViewById(R.id.checkin_date);
+            mLocationTextView = (TextView) itemView.findViewById(R.id.saved_location);
+
 
         }
-        public void bind(Crime crime) {
-            mCrime = crime;
-            mTitleTextView.setText(mCrime.getTitle());
-            mDateTextView.setText(mCrime.getDate().toString());
+        public void bind(CheckinStore checkin) {
+            mCheckin = checkin;
+            mTitleTextView.setText(mCheckin.getTitle());
+            mPlaceTextView.setText(mCheckin.getPlace());
+            mDetailsTextView.setText(mCheckin.getDetails());
+            mDateTextView.setText(mCheckin.getDate().toString());
+            mLocationTextView.setText(mCheckin.getLocation());
         }
 
         @Override
         public void onClick(View view) {
-            Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());
+            Intent intent = CheckinActivity.newIntent(getActivity(), mCheckin.getId());
             startActivity(intent);
         }
     }
-    private class CrimeAdapter extends RecyclerView.Adapter<CrimeHolder> {
-        private List<Crime> mCrimes;
-        public CrimeAdapter(List<Crime> crimes) {
-            mCrimes = crimes;
+    private class CheckinAdapter extends RecyclerView.Adapter<CheckinHolder> {
+        private List<CheckinStore> mCheckins;
+        public CheckinAdapter(List<CheckinStore> checkins) {
+            mCheckins = checkins;
         }
 
 
         @Override
-        public CrimeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public CheckinHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-            return new CrimeHolder(layoutInflater, parent);
+            return new CheckinHolder(layoutInflater, parent);
         }
 
         @Override
-        public void onBindViewHolder(CrimeHolder holder, int position) {
-            Crime crime = mCrimes.get(position);
-            holder.bind(crime);
+        public void onBindViewHolder(CheckinHolder holder, int position) {
+            CheckinStore checkin = mCheckins.get(position);
+            holder.bind(checkin);
 
         }
 
         @Override
         public int getItemCount() {
-            return mCrimes.size();
+            return mCheckins.size();
 
         }
 
-        public void setCrimes(List<Crime> crimes) {
-            mCrimes = crimes;
+        public void setCheckins(List<CheckinStore> checkins) {
+            mCheckins = checkins;
         }
     }
 
